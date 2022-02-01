@@ -1,0 +1,202 @@
+\documentclass[aspectratio=43,t]{beamer}
+\usetheme{KTH}
+
+% remove this if using XeLaTeX or LuaLaTeX
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{outlines}
+\usepackage{lipsum}
+\usepackage{minted}
+\usepackage{tikz}
+\usepackage{array}
+\usepackage{algorithm,algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[export]{adjustbox}
+
+%\setbeamersize{text margin left=0pttext margin right=0pt}
+%\addtobeamertemplate{frametitle}{\vspace*{2cm}}{\vspace*{-2cm}}
+\addtobeamertemplate{frametitle}{\vspace*{0pt}}{\vspace*{15pt}}
+\setbeamersize{text margin left=45pt, text margin right=15pt}
+
+
+\begin{document}
+
+%------------------------------------------------
+\begin{frame}[noframenumbering,plain]
+%  \vspace{0.02\textheight}
+  \vspace{0.30\textheight}
+  
+\begin{columns}[]
+\column{30em}
+\Large{\centerline{\usebeamercolor[fg]{title}Spectral efficiency in NB-IoT}}
+
+\vspace{0.1\textheight}
+
+\small{\centerline{Sigurgeir Gunnarsson}}
+\scriptsize{\centerline{\tt sgun@kth.se}}
+\scriptsize{\centerline{}}
+\end{columns}
+\end{frame}
+
+
+
+%------------------------------------------------
+\usebackgroundtemplate{\vbox{\null\vspace{3mm}
+  \hspace{3mm}\pgfuseimage{kthlogosmall}\par
+  \vspace{72mm}\hbox{\hspace{-75mm}\pgfuseimage{kthplatta}}}}
+
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Assumptions}
+
+The type of NB-IoT is the one where it is coexisting with LTE i.e. the NB-IoT uses the LTE control resource blocks (RB) to transmit [Schlienz, 2016].
+
+~\\
+
+There are number of coverage classes, each with its own transmission time interval (TTI) repetition pattern i.e. how many TTI the UE gets assigned in a given cycle.
+
+~\\
+
+The repetition pattern is fixed for each class and the challenge is to assign a class to the UE's to maximize efficiency.
+
+%The challenge is to optimize transmission time interval (TTI) scheduling of different coverage classes. That means different classes are scheduled to transmit with dynamic pattern like every other TTI for one class or two out of three consecutive TTI for another.
+
+\end{frame}
+
+
+%------------------------------------------------
+%\begin{frame}
+%\frametitle{Questions}
+%
+%\textbf{Questions}
+%
+%\end{frame}
+
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Problem statement}
+
+%The coexistence with LTE and the fact that NB-IoT uses the same signalling resources as LTE, limits the capacity of the NB-IoT platform.
+
+NB-IoT uses the same signalling structure as LTE, which is a finite resource in terms of capacity. When the number of UE's increases in the cell, efficiency of the scheduling becomes more important.
+
+~\\
+
+The UE's are located at different distance from the base station (BS) with different radio conditions which they compensate for with having different coverage classes. Each coverage class is assigned a different number of TTIs in each cycle.
+
+~\\
+
+The challenge is to assign the correct class to the UE's to maximize data capacity and number of served UE's.
+
+\end{frame}
+
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Problem statement \small{cont.}}
+
+The goal of the project is:
+
+\begin{outline}
+\1 Establish an understanding of the capacity of NB-IoT
+  \2 Show with simulations how close to the theoretical capacity is possible to reach
+\1 Apply reinforcement learning algorithm on the scheduler
+  \2 The goal is trying to increase the capacity or get closer to the theoretical limit
+\end{outline}
+
+\end{frame}
+
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Topics to be covered}
+
+\begin{outline}
+\1 NB-IoT
+  \2 Structure and usage
+  \2 Coexistence with LTE
+\1 Capacity and congestion
+  \2 Establish levels where service begins to degrade
+\1 Machine learning (ML)
+  \2 Reinforcement learning
+\end{outline}
+
+\end{frame}
+
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Work to be done}
+
+\begin{outline}
+\1 Simulate usage
+  \2 Create simulation with load around the maximum capacity
+  \2 Monte carlo ?
+\1 Apply ML techniques on the simulation
+  \2 Verify if it increases capacity
+\end{outline}
+
+\end{frame}
+
+
+%------------------------------------------------
+\begin{frame}
+
+\vspace{3.5cm}
+\Huge{\hspace{3.4cm}\usebeamercolor[fg]{title}Notes}
+
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Action points regarding scoping of the project}
+
+How to adapt to the traffic for scheduling allocation of shared channel resources
+
+\begin{itemize}\itemsep1em
+ \justifying
+ \item learning is from the view of the BTS
+ \item different classes should have different TTI i.e. how many TTI per class
+ \item Use traffic pattern from human2human (H2H) traffic
+ \item create simulation data from that
+\end{itemize}
+
+\end{frame}
+
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Thoughts and points}
+
+The NB-IoT radio interface has to be described and put into context of existing systems [use Schlienz, 2016].
+
+~\\
+
+Identify when the load is such that efficiency starts to become an issue [Harwahyu, 2017].
+
+~\\
+
+Work from that result and start making adjustements on the access of different coverage classes.
+
+~\\
+
+Dig further into the problem of having multiple coverage classes. Identify if it is a near far problem or something else [use Azari. 2019].
+
+\end{frame}
+
+
+%------------------------------------------------
+\begin{frame}
+
+\vspace{3.5cm}
+\Huge{\hspace{3.4cm}\usebeamercolor[fg]{title}Thanks!}
+
+\end{frame}
+
+\end{document}

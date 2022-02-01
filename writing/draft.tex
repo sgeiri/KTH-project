@@ -1,0 +1,324 @@
+\documentclass[10pt,a4paper,titlepage,twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+% mathtools for: Aboxed (put box on last equation in align envirenment)
+\usepackage{microtype} %improves the spacing between words and letters
+
+\usepackage{graphicx}
+%\graphicspath{ {./pics/} {./eps/}}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{ulem}
+\usepackage{outlines}
+
+\newcommand\given[1][]{\:#1\vert\:}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% COLOR DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[svgnames]{xcolor} % Enabling mixing colors and color's call by 'svgnames'
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{MyColor1}{rgb}{0.2,0.4,0.6} %mix personal color
+\definecolor{newred}{HTML}{C5000B} %mix personal color
+
+\newcommand{\textb}{\color{Black} \usefont{T1}{lmss}{m}{n}}
+\newcommand{\blue}{\color{MyColor1} \usefont{T1}{lmss}{m}{n}}
+\newcommand{\blueb}{\color{MyColor1} \usefont{T1}{lmss}{b}{n}}
+\newcommand{\red}{\color{newred} \usefont{T1}{lmss}{m}{n}}
+\newcommand{\green}{\color{Turquoise} \usefont{T1}{lmss}{m}{n}}
+\newcommand{\bluen}{\color{MyColor1} \usefont{T1}{phv}{b}{n}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[norule,hang,flushmargin]{footmisc}
+\usepackage[font=footnotesize, hang]{caption}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FONTS AND COLORS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    SECTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titlesec}
+\usepackage{sectsty}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%set section/subsections HEADINGS font and color
+\sectionfont{\color{MyColor1}}  % sets colour of sections
+\subsectionfont{\color{MyColor1}}  % sets colour of sections
+
+%set section enumerator to arabic number (see footnotes markings alternatives)
+\renewcommand\thesection{\arabic{section}.} %define sections numbering
+\renewcommand\thesubsection{\thesection\arabic{subsection}} %subsec.num.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		CAPTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{caption}
+\usepackage{subcaption}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\captionsetup[figure]{labelfont={color=MyColor1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		!!!EQUATION (ARRAY) --> USING ALIGN INSTEAD
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%using amsmath package to redefine eq. numeration (1.1, 1.2, ...) 
+%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\theequation}{\thesection\arabic{equation}}
+
+%set box background to grey in align environment 
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\makeatletter
+\patchcmd{\@Aboxed}{\boxed{#1#2}}{\colorbox{black!15}{$#1#2$}}{}{}%
+\patchcmd{\@boxed}{\boxed{#1#2}}{\colorbox{black!15}{$#1#2$}}{}{}%
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\rmdefault}{phv} % arial
+\renewcommand{\sfdefault}{phv} % arial
+
+
+% Page layout (geometry)
+%\setlength\voffset{-1in}
+%\setlength\hoffset{-1in}
+%\setlength\topmargin{2.5cm}
+%\setlength\rightmargin{1.5cm}
+%\setlength\oddsidemargin{2.5cm}
+%\setlength\textheight{22.4cm}
+%\setlength\textwidth{14.00cm}
+%\setlength\footskip{1.3cm}
+%\setlength\headheight{0cm}
+%\setlength\headsep{0cm}
+
+\usepackage
+[
+        a4paper,% other options: a3paper, a5paper, etc
+        left=2.5cm,
+        right=2.5cm,
+        top=3cm,
+        bottom=3cm,
+]
+{geometry}
+
+
+% Paragraph formatin
+\linespread{1}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 3pt minus 3pt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		Import listings package and define parameters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+\definecolor{grey}{rgb}{0.9,0.9,0.9}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\lstset{backgroundcolor=\color{grey},frame=single, language=Matlab, basicstyle=\tiny,commentstyle=\color{mygreen},keywordstyle=\color{blue}
+}
+
+% Yma colors
+\definecolor{ymagray}{rgb}{0.2,0.2,0.2}
+\definecolor{ymablue}{RGB}{0,132,209}
+\definecolor{ymadblue}{RGB}{0,69,134}
+\definecolor{ymagreen}{HTML}{579d1c}
+\definecolor{ymaorng}{HTML}{FF950E}
+
+\definecolor{ymared}{HTML}{c5000b}
+
+
+%
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% - - - - - - - - - - Fancy Header - - - - - - - - - - %
+%% L/C/R denote left/center/right header (or footer) elements
+%% E/O denote even/odd pages
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[LO,RE]{\slshape\thepage}
+\renewcommand{\headrulewidth}{0.1pt}
+\cfoot{}
+
+
+\makeatletter
+\let\reftagform@=\tagform@
+\def\tagform@#1{\maketag@@@{(\ignorespaces\textcolor{ymadblue}{#1}\unskip\@@italiccorr)}}
+\renewcommand{\eqref}[1]{\textup{\reftagform@{\ref{#1}}}}
+\makeatother
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor={ymadblue}}
+
+
+\newcommand{\tilv}[1]{\textbf{\color{ymagreen} [#1]}}
+\newcommand{\note}[1]{\textbf{\color{ymagray}[#1]}}
+\newcommand{\highlight}[1]{{\bluen{#1}}}
+\newcommand{\hghlght}[1]{\textbf{\color{ymaorng} #1}}
+\newcommand{\point}[1]{\textbf{\color{ymared} #1}}
+\newcommand{\rem}[1]{{\red{\textbf{REMOVE:}} \red{\sout{#1}}}}
+
+\usepackage[onehalfspacing]{setspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Hyphenation correction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\babelhyphenation[icelandic]{
+%  Forsendurnar
+%  líkinda
+%}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PREPARE TITLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\blue Thesis - draft \\
+\blueb NB-IoT}
+\author{Sigurgeir Gunnarsson \\KTH - Communication Systems}
+\date{\today}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\maketitle
+
+
+\thispagestyle{empty}
+\tableofcontents
+
+%\cleardoublepage
+\newpage
+\setcounter{page}{1}
+
+
+
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+% Inngangur
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\section{Intro}
+
+%\hglght{* Describe the problem at hand}
+
+The idea of having all devices connected has led to the concept of Internet of Things (IoT). Here all devices such as electric or water meters, household devices and about every thing with built in sensors, are communicating with each other or with a central server via short distance communication or wide area networks (WAN).
+
+Making this happening brings out a challenge due to the amount of devices, connected to a single cell in the cellular network. All these devices extract resources, they interfere with each other and their location is very probable deep in the house or in the cellar, where communication is hard to withheld.
+
+\point{The challenge is on the physical channels, when the load increases. The random access can result in collision, making it necessary to resend the package. Re-transmission causes unnecessary communication and extra battery. This is therefore something to avoid.}
+
+\point{Keep in mind that NB-IoT is UL-driven service, unlike traditional mobile services that are DL-driven}
+
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+% Kafli
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\clearpage
+\section{NB-IoT}
+
+According to 3GPP there are three implementations of wide area network (WAN) narrowband internet-of-things (NB-IoT). One uses a single GSM transmission channel (TCH) and is integrated into the GSM network. The other two are co-existing with LTE where one uses the guard band between LTE channels and the other is embedded into the LTE carrier, using resources of the LTE carrier.
+
+NB-IoT downlink is defined to use 12 sub-carriers, with each sub-carrier having bandwidth of 15 kHz. The uplink uses either a single sub-carrier, which can be of varying bandwidth: 3,75 kHz or 15 kHz, or it uses 3, 6, or 12 sub-carriers of 15 kHz bandwidth each\cite{3gpp}.
+
+The total bandwidth of the downlink sums to 180 kHz. That fits neatly into a GSM TCH which is 200 kHz wide. The LTE guard band varies in width, depending on carrier bandwidth. Most deployments of LTE use 5 MHz or larger bandwidth, since the smaller bandwidths introduce limitations. The sub-carrier definition for the in-band case, is the same as used by the LTE control channels. The NB-IoT transmission can therefore be carried alongside normal LTE traffic if there is capacity to share the control space \point{Need to confirm if it is correctly understood that LTE and NB-IoT share the control space and if they can co-exist on the same channel}.
+
+NB-IoT is defined based on the LTE carrier structure. The smallest LTE transmission element is resource element (RE) which uses 15 kHz bandwidth. A resource block (RB) is 12 RE and occupies 180 kHz (12*15 kHz=180kHz). The LTE carrier can be of varying bandwidth, from 1,4 MHz to 20 MHz, where the difference lies in the number of RB used.
+
+Since the structure is common, NB-IoT can be defined as functionality within the LTE carrier. According to Schlienz (2106) \cite{schlienz} there are specific RB indexes where NB-IoT can be activated. That way both functionalities (LTE and NB-IoT) are active at the same time.
+
+
+
+\subsection{Evaluation points}
+
+The limitations when it comes to serving multiple users lies within the random access procedure. The user has limited power and has therefore to make its transmission based on most efficient transmission methods. Collision is important to avoid. Modulation and coding scheme have to navigate between giving the maximum throughput but with best recovery of distorted bits \point{this should be looked into - find articles evaluating this trade-off}.
+
+When the user has gotten the random access procedure completed and is scheduled on the transmission channels. The next step is the focus of the thesis - how to maximise ??, to be able to service more users and withholding the goal of minimum transmission.w
+
+
+\subsection{Extras}
+
+Schlienz (2016) \cite{schlienz} is a very good summary of NB-IoT structure. The references are all 3GPP TS36.2xx, which is the channel structure of LTE - with a chapter covering NB-IoT.
+
+Question: is it sufficient to rewrite Shclienz (2016) and refer to the article, plus the 3GGP standard ?
+
+\point{* Describe NB-IoT}
+
+There are three implementation methods of NB-IoT. There is standalone, guardband and in-band.
+
+\textbf{6.4.1 Standalone Deployment:}
+Standalone deployment is a deployment scenario in which operators deploy NB-IoT using
+existing idle spectrum resources. These resources can be the operator’s spectrum
+fragments with non-standard bandwidths or spared from other radio access technologies
+(RATs) by refarming.
+
+\textbf{6.4.2 LTE Guardband Deployment:}
+Guardband deployment is a deployment scenario in which operators deploy NB-IoT in guard
+bands within existing LTE spectrum resources.
+
+\textbf{6.4.3 LTE In-band Deployment:}
+In-band deployment is a deployment scenario in which operators deploy NB-IoT using
+existing LTE in-band resource blocks (RBs).
+\tilv{GSMA deployment guide}
+
+
+In the 3GPP NB-IoT technical specification, chapter 4.2, the radio resources are defined in deep details (if relevant).
+\cite{schlienz}.
+
+In the following work of the focus will be on in-band LTE NB-IoT.
+
+\note{WHERE IS TTI DESCRIBED !!!}
+
+\point{* Cover the access method}
+
+Schlienz (2016) is a really god reference to work the access method from.
+1
+
+* Coverage classes - how different classes affect the access mechanism
+
+Here are some outstanding questions. One coverage class something mentioned in the specifikation or is it something suggested in literature.
+
+
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+% Heimildaskrá
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\clearpage
+\section{References}
+
+\begin{thebibliography}{4}
+\bibitem{schlienz}
+Schlienz, J., \& Raddino, D. (2016).
+\textit{Narrowband internet of things whitepaper}
+. White Paper, Rohde\&Schwarz, 1-42.
+
+\bibitem{3gpp}
+3GPP TS 36.201,
+\textit{3rd Generation Partnership Project; Technical Specification Group Radio Access Network; Evolved Universal Terrestrial Radio Access (E-UTRA); LTE physical layer; General description}, version 15.2.0, Release 15.
+
+\bibitem{3gpp211}
+3GPP TS 36.211,
+\textit{3rd Generation Partnership Project; Technical Specification Group Radio Access Network; Evolved Universal Terrestrial Radio Access (E-UTRA); LTE physical layer; General description}, version 15.14.0, Release 15.
+
+\bibitem{chen}
+Chen, M., Miao, Y., Hao, Y., \& Hwang, K. (2017).
+\textit{Narrow band internet of things}
+. IEEE access, 5, 20557-20577.
+
+\end{thebibliography}
+
+
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+% Glósur !!!!
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\clearpage
+\section{\point{Outstanding}}
+
+\begin{itemize}
+\item Is there a code available that makes it possible to emulate the access mechanism and show the clash when the load increases ?
+
+\end{itemize}
+
+
+
+
+\end{document}

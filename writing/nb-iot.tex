@@ -1,0 +1,499 @@
+\documentclass[10pt,a4paper,titlepage,twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+
+\usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
+% mathtools for: Aboxed (put box on last equation in align envirenment)
+\usepackage{microtype} %improves the spacing between words and letters
+
+\usepackage{graphicx}
+%\graphicspath{ {./pics/} {./eps/}}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{ulem}
+\usepackage{outlines}
+
+\newcommand\given[1][]{\:#1\vert\:}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% COLOR DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[svgnames]{xcolor} % Enabling mixing colors and color's call by 'svgnames'
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{MyColor1}{rgb}{0.2,0.4,0.6} %mix personal color
+\definecolor{newred}{HTML}{C5000B} %mix personal color
+\newcommand{\textb}{\color{Black} \usefont{T1}{lmss}{m}{n}}
+\newcommand{\blue}{\color{MyColor1} \usefont{T1}{lmss}{m}{n}}
+\newcommand{\blueb}{\color{MyColor1} \usefont{T1}{lmss}{b}{n}}
+\newcommand{\red}{\color{newred} \usefont{T1}{lmss}{m}{n}}
+\newcommand{\green}{\color{Turquoise} \usefont{T1}{lmss}{m}{n}}
+\newcommand{\bluen}{\color{MyColor1} \usefont{T1}{phv}{b}{n}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[norule,hang,flushmargin]{footmisc}
+\usepackage[font=footnotesize, hang]{caption}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FONTS AND COLORS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    SECTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titlesec}
+\usepackage{sectsty}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%set section/subsections HEADINGS font and color
+\sectionfont{\color{MyColor1}}  % sets colour of sections
+\subsectionfont{\color{MyColor1}}  % sets colour of sections
+
+%set section enumerator to arabic number (see footnotes markings alternatives)
+\renewcommand\thesection{\arabic{section}.} %define sections numbering
+\renewcommand\thesubsection{\thesection\arabic{subsection}} %subsec.num.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		CAPTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{caption}
+\usepackage{subcaption}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\captionsetup[figure]{labelfont={color=MyColor1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		!!!EQUATION (ARRAY) --> USING ALIGN INSTEAD
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%using amsmath package to redefine eq. numeration (1.1, 1.2, ...) 
+%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\theequation}{\thesection\arabic{equation}}
+
+%set box background to grey in align environment 
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\makeatletter
+\patchcmd{\@Aboxed}{\boxed{#1#2}}{\colorbox{black!15}{$#1#2$}}{}{}%
+\patchcmd{\@boxed}{\boxed{#1#2}}{\colorbox{black!15}{$#1#2$}}{}{}%
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\rmdefault}{phv} % arial
+\renewcommand{\sfdefault}{phv} % arial
+
+
+% Page layout (geometry)
+%\setlength\voffset{-1in}
+%\setlength\hoffset{-1in}
+%\setlength\topmargin{2.5cm}
+%\setlength\rightmargin{1.5cm}
+%\setlength\oddsidemargin{2.5cm}
+%\setlength\textheight{22.4cm}
+%\setlength\textwidth{14.00cm}
+%\setlength\footskip{1.3cm}
+%\setlength\headheight{0cm}
+%\setlength\headsep{0cm}
+
+\usepackage
+[
+        a4paper,% other options: a3paper, a5paper, etc
+        left=2.5cm,
+        right=2.5cm,
+        top=3cm,
+        bottom=3cm,
+]
+{geometry}
+
+
+% Paragraph formatin
+\linespread{1}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 3pt minus 3pt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		Import listings package and define parameters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+\definecolor{grey}{rgb}{0.9,0.9,0.9}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\lstset{backgroundcolor=\color{grey},frame=single, language=Matlab, basicstyle=\tiny,commentstyle=\color{mygreen},keywordstyle=\color{blue}
+}
+
+% Yma colors
+\definecolor{ymagray}{rgb}{0.2,0.2,0.2}
+\definecolor{ymablue}{RGB}{0,132,209}
+\definecolor{ymadblue}{RGB}{0,69,134}
+\definecolor{ymagreen}{RGB}{87,157,28}
+
+
+%
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% - - - - - - - - - - Fancy Header - - - - - - - - - - %
+%% L/C/R denote left/center/right header (or footer) elements
+%% E/O denote even/odd pages
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[LO,RE]{\slshape\thepage}
+\renewcommand{\headrulewidth}{0.1pt}
+\cfoot{}
+
+
+\makeatletter
+\let\reftagform@=\tagform@
+\def\tagform@#1{\maketag@@@{(\ignorespaces\textcolor{ymadblue}{#1}\unskip\@@italiccorr)}}
+\renewcommand{\eqref}[1]{\textup{\reftagform@{\ref{#1}}}}
+\makeatother
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor={ymadblue}}
+
+
+
+\newcommand{\note}[1]{\textcolor{ymagray}{\textbf{[#1]}}}
+\newcommand{\highlight}[1]{{\bluen{#1}}}
+\newcommand{\hglt}[1]{{\red{#1}}}
+\newcommand{\rem}[1]{{\red{\textbf{REMOVE:}} \red{\sout{#1}}}}
+
+\usepackage[onehalfspacing]{setspace}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Hyphenation correction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\babelhyphenation[icelandic]{
+%  Forsendurnar
+%  líkinda
+%}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PREPARE TITLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\blue Thesis - draft \\
+\blueb NB-IoT}
+\author{Sigurgeir Gunnarsson \\KTH - Communication Systems}
+\date{\today}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+\maketitle
+
+
+\thispagestyle{empty}
+\tableofcontents
+
+\cleardoublepage
+\newpage
+\setcounter{page}{1}
+
+
+\section{Introduction}
+
+Problem statement and scope of the work !!!
+
+
+
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+% Kafli
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\clearpage
+\section{NB-IoT}
+
+* Describe NB-IoT
+
+* Cover the access method
+
+* Coverage classes - how different classes affect the access mechanism
+
+* Cover power usage of the access procedure and why it matters
+
+* Describe the problem at hand
+
+Is there a code available that makes it possible to emulate the access mechanism and show the clash when the load increases ?
+
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+% Kafli
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\clearpage
+\section{Machine Learning}
+
+* Machine Learning (ML) mechanism to be investigated and tried out
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+% Kafli 2
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\if(0)
+\clearpage
+\section{Beiting hefðbundnu aðferðarinnar}\label{gr_main}
+
+Í kafla \ref{gr_yfirf} er farið yfir grunninn bak við aðferð Gutenberg-Richter (GR) og hvernig á að reikna b-gildið, óþekktu stærðina í jöfnu líkindafallsins. Til að fá tölulegt mat á aðferðina er skoðað safn jarðskjálfta á Reykjanesi og Reykjaneshrygg. Safnið inniheldur alla jarðskjálfta á árunum 1991 til 2015 með minnsta marktæka jarðskjálftann M$_{min}=2$. Mynd \ref{fig:collect} sýnir hvernig jarðskjálftar í safninu af stærð M$\geq3,7$ dreifast á kort, litað eftir stærð jarðskjálfta.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{img/dreifing_kort.png}
+  \vspace{-4mm}
+  \caption{Dreifing jarðskjálfta lagt út á kort, minnsta stærð jarðskjálfta er M$=3,7$}
+  \label{fig:collect}
+\end{figure}
+
+Þar sem GR lögmálið lýsir sambandinu milli stærðar jarskjálfta og fjölda jarðskjálfta af tiltekinni stærð, er eðlilegt að skoða dreifinguna. Mynd \ref{fig:gr_dist} sýnir annars vegar fjölda jarðskjálfta af tiltekinni stærð á línulegum skala (efra grafið) og hins vegar á log-normal skala (neðra grafið).
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{img/gr_dist.png}
+  \vspace{-4mm}
+  \caption{Samband stærðar jarðskjálfta og fjölda af tiltekinni stærð}
+  \label{fig:gr_dist}
+\end{figure}
+
+Ólíkt GR lögmálinu, þá sýnir mynd \ref{fig:gr_dist} ekki uppsafnaðan fjölda. Það má engu að síður sjá veldishnignun á efra grafinu og beina línu á vinstri hluta neðra grafsins. Beina línan virðist hins vegar einungis eiga við M upp í kringum $3,5$. Til samanburðar er mynd \ref{fig:cum_sum} sem sýnir sambandið eins og því er lýst með lögmáli GR, þ.e. með uppsöfnuðum fjölda af sömu stærð jarðskjálfta eða stærri.
+
+%\begin{figure}[h]
+%  \centering
+%  \includegraphics[width=\textwidth]{img/gr_log_norm_dist.png}
+%  \vspace{-4mm}
+%  \caption{Dreifingin sett fram skv. lögmáli Gutenberg-Richter}
+%  \label{fig:gr_log_norm_dist}
+%\end{figure}
+
+
+Mynd \ref{fig:cum_sum} sýnir mun skýrara línulegt samband en mynd \ref{fig:gr_dist}, enda mælingar af tiltekinni stærð orðnar tengdar mælingum af stærðunum fyrir ofan. Þetta hefur einhvers konar síunar áhrif þar sem vinstri hlutinn á neðra grafi myndar \ref{fig:gr_dist} er orðinn mun hreinni á mynd \ref{fig:cum_sum}.
+
+Næsta skref er að beita aðferð kafla \ref{gr_yfirf} til að fá b-gildið eða hallatöluna á mynd \ref{fig:cum_sum}. Hallatalan lýsir línulega sambandinu milli stærðar og uppsafnaðs fjölda og fæst með jöfnu \ref{eq:mle}: $$b=0.93512$$ Til að fá skurðpunkt við y-ás er notuð línuleg aðhverfugreining með gefið b. Línulega sambandið er sýnt með brotalínu á mynd \ref{fig:cum_sum}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/cum_sum.png}
+  \vspace{-4mm}
+  \caption{Dreifingin ásamt línulega sambandi GR, b=0.93512}
+  \label{fig:cum_sum}
+\end{figure}
+
+Til að fá samhengi í b-gildið eru aftur reiknuð líkindin, nú fyrir jarðskjálfta af stærð $M\geq5$ og $M\geq6$: $$P[5\leq m]=10^{-0.93512\cdot(5-2)}=0.001565=0.1565\%$$ $$P[6\leq m]=10^{-0.93512\cdot(6-2)}=0.0001818=0.01818\%$$ Niðurstaðan er að líkindin hafa aukist fyrir $M\geq6$. Í stað eins af hverjum 10000 jarðskjálftum sé $M\geq6$, þá er búist við að einn af hverjum 5501 sé það. Þetta er í samræmi við líkindadreifinguna en dreifingin fellur minna þegar b-gildið lækkar og þar með aukast líkindin í halanum þ.e. fyrir stærri M.
+%Áætlaður endurkomutími jarðskjálfta af stærð M=6 eða stærri, út frá jöfnu \ref{eq:prob_ex}, er reiknaður 15.1 ár.
+
+Gagnasafnið er 7271 mælingar og spannar 9015 daga. Það gerir að meðaltali 0,8065 jarðskjálfta á dag. Líkindin gefa að 1 af hverjum 639 jarðskjálftum uppfylli $M\geq5$, sem jafngildir endurkomutíma upp á 17 mánuði. Á sama hátt, miðað við að 1 af hverjum 5501 uppfylli skilyrðin $M\geq6$, er endurkomutími jarðskjálfta $M\geq6$ rúm 12 ár.
+
+
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+% Kafli 3
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\clearpage
+\section{Aðferð stórra útgilda - Pareto dreifing}
+
+Í bókinni \textit{An Introduction to Statistical Modeling of Extreme Values} eftir Coles, S. (2001) er fjallað um vandamálið sem kemur upp á myndum \ref{fig:gr_dist} og \ref{fig:cum_sum}. Þá er verið að vísa til þess hvernig matið á dreifingunni bjagast og beygir af leið þegar fjöldi tilfella verður lítill fyrir gildi langt frá massanum.
+
+%Hér verður unnið með dreififall F og þröskuld u þannig að líkindin á atburði sem fer umfram þröskuldinn er: $$P[X>u+y \given[\big] X>u] = \frac{1-F(u+y)}{1-F(u)}, \quad y>0$$
+
+Lausnin sem Coles kynnir, byggir á dreifingum sem mynda fjölskyldu almennra útgilda dreifinga (e. generalized extreme value distribution). Í tilfelli þar sem $X_1,X_2,...$ eru óháðar hendingar með sameiginlega dreifingu $F$, þá er hægt að skilgreina $M_n$ þannig:
+\[
+M_n = \max\{X_1,...,X_n\}
+\]
+Ef líkindin uppfylla $P[M_n<z]\approx G(z)$, þá er hægt að setja fram almennu formúlana fyrir dreifinguna $G(z)$:
+\[
+G(z) = \exp \left\lbrace -\left[ 1+ \xi \left( \frac{z-\mu}{\sigma} \right) \right]^{-1/\xi} \right\rbrace
+\]
+þar sem z er stak í menginu $\{z : 1 + \xi (z-\mu)/ \sigma > 0\}$ og breiturnar uppfylla $-\infty < \mu,\xi < \infty$ og $0<\sigma$. Sértilfelli af formúlunum, sem á við verkefnið sem er verið að skoða, er þegar $0<\mu,\sigma$. Þá er hægt að finna nógu stórt $u$ þannig að dreifinguna $(X-u)$, gefið $X>u$, er hægt að nálga með:
+\begin{equation}\label{eq:gen_par}
+H(y) = 1 - \left( 1 + \frac{\xi y}{\tilde{\sigma}} \right) ^{-1/\xi}
+\end{equation}
+þar sem y er stak í menginu $\{y : y>0 ~og~ (1 + \xi y/ \tilde{\sigma}) > 0\}$ og
+\begin{equation}\label{eq:sigma}
+\tilde{\sigma} = \sigma + \xi(u-\mu)
+\end{equation}
+%\note{S.C.[2001] kafli 4.2}
+
+Jafna \ref{eq:gen_par} gengur undir heitinu almenn Pareto dreifing (Generalized Pareto family). Sértilfelli hennar er þegar $\xi\rightarrow0$ en þá fæst:
+\[
+H(y) = 1 - \exp\left(-\frac{y}{\tilde{\sigma}} \right),~ y>0
+\]
+Hér er komin formúla fyrir veldisdreifingu með stuðul $1/\tilde{\sigma}$, $Exp(1/\tilde{\sigma})$.
+
+
+
+
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+% Kafli 6
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\clearpage
+\section{Samanburður við gagnasafn sem nær lengra í tíma}
+
+Veikleiki niðurstaðnanna um tíðni jarðskjálfta af stærð $M\geq6$ liggur í því að verið er að skoða stærð jarðskjálfta sem ekki fyrirfinnst í gagnasafninu. Til að bæta upp fyrir veikleikann gagnasafnsins er líka skoðaður endurkomutími jarðskjálfta af stærð $M\geq5$.
+
+Stærðin $M=6$ er hins vegar ákveðin út frá markverðanleika. Jarðskjálftar minni en 6 teljast hóflegir skv. USGS og hafa litla verkfræðilega þýðingu. Stærri jarðskjálftar en 6 teljarst sterkir og fara að gera sig gildandi þegar kemur að hönnun mannvirkja.
+
+Gagnasafnið er mjög ýtarlegt. Það hefur upplausn $\Delta M=0,01$ og minnsta marktæka jarðskjálfta $M_{min}=2$. Hins vegar spannar það ekki nema tæp 25 ár, frá 1991 til 2015. Til að fá stærra tímabil þarf að skoða gagnasafn sem spannar rúm 64 ár, frá 1926 - 1990. Munurinn er að upplausnin á lengra safninu er ekki nema $\Delta M=0,1$ og minnsti marktæki jarðskjálftinn $M_{min}=3$. Í lengra safninu eru hins vegar þrír jarðskjálftar af stærðinni $M\geq6$, á sama svæði og ýtarlegra gagnasafnið þekur.
+
+Enn annað gagnasafn byggir á mati út frá sögulegum heimildum og er gefið í töflu í Náttúruvá á Íslandi (Júlíus Sólnes o.fl. (2013)). Þetta safn nær frá síðasta stóra jarðskjálfta 2008 aftur til 1706 og inniheldur 21 jarðskjálfta stærri eða jafnt og 5,8. Á svæðinu sem ýtarlega safnið þekur eru sjö jarðskjálftar $M\geq 6$ á árunum frá 1706 til 1968.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|l|p{1.4cm}p{1.4cm}p{1.4cm}p{1.4cm}p{1.4cm}|p{1.2cm}p{1.2cm}p{1.2cm}|}
+  \hline
+        & \multicolumn{5}{|c|}{Dreififöll} & \multicolumn{3}{|c|}{Gagnasöfn} \\
+        & GR & GR & GR & Pareto & Pareto & 1991 -& 1926 - & 1706 -\\
+     Stærð & $M=2,0$ & $M=4,0$ & $M=4,4$ & $M=3$ & $M=4,2$ & 2015 & 1990 & 2008\\
+  \hline
+  $M\geq5$ & $1,41$ & $3,62$ & $11,6$ & $4,26$ & $13,16$ & $3,53$ & $1,34$ & - \\
+  $M\geq6$ & $ 12,16$ & $42,75$ & $203,09$ & $204,02$ & $296,07$ & - & $21,39$ & $43,19$ \\
+  \hline
+  \end{tabular}
+  \caption{Samantekt útreiknaðs endurkomutíma skv. dreififöllum og endurkomutími þriggja gagnasafna}
+  \label{table:prob}
+\end{table}
+
+Útreiknaður endurkomutími jarðskjálfta af stærð $M\geq5$ og $M\geq6$ sem hefur verið reiknaður í fyrri köflum er tekinn saman í töflu \ref{table:prob}. Til samanburðar er endurkomutíminn eins og hann kemur fyrir í gagnasöfnunum þremur. Strikin í gagnasöfnunum koma til af því að í 1991-2015 safninu er enginn jarðskjálfti $M\geq6$. Í 1706-2008 safninu er minnsti marktæki jarðskjálftinn 5,8 þannig safnið er ekki marktækt fyrir $M\geq5$. 
+
+Markverðasta niðurstaðan úr töflu \ref{table:prob} er að GR - $M=4,0$ kemst næst endurkomutímunum í gagnasöfnunum. GR - $M=2,0$ passar vel við 64 ára safnið en er langt frá báðum hinum. Pareto - $M=3,0$ gefur svipaða niðurstöðu og GR - $M=4,0$ á endurkomutíma jarðskjálfta $M\geq5$ en er langt frá endurkomutímanum á jarðskjálfta $M\geq6$. Hinar aðferðirnar voru hvergi nálægt því að gefa nothæfa niðurstöðu.
+
+Í kafla \ref{comp} var dreififallið fyrir GR - $M=2$ afskrifað þar sem það vék frá mælingunum þegar $M$ stækkaði. Það skýtur því skökku við að líkindin sem dreififallið falli svo vel að endurkomutíma 1926-1990 safnsins. Til að sjá hvernig þetta gerist þarf að skoða dreifingu mælinga úr 1926-1990 safninu saman með 1991-2015 safninu á einni mynd.
+
+Mynd \ref{fig:gagnasofn} sýnir hvernig lengra gagnasafnið vex mun hraðar fyrir stór gildi $M$. Það skýrir einnig styttri endurkomutíma safnsins samanborið við hin, þ.e. það er meiri fjöldi mælinga af þessari stærð í safninu.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{img/gagnasofn.png}
+  \vspace{-4mm}
+  \caption{Dreifing mælinga fyrir gagnasöfnin 1926-1990 og 1991-2015}
+  \label{fig:gagnasofn}
+\end{figure}
+
+Hægt hefði verið að reikna b-gildi aðferðar Gutenberg-Richter með því að nota bæði gagnasöfnin. Niðurstaðan hefði líklegast verið í áttina að því sem fékkst með ótakmarkaða gagnasafninu. Hins vegar hefði þurft að gera sérstakar ráðstafanir þar sem upplausnin og tímaspan safnanna er ólík og fjöldinn þess vegna ekki samanburðarhæfur beint.
+
+Í grein Weichert (1980) flokkar hann jarðskjálftana í stærðarflokka, reiknar líkindi flokksins og fær b-gildið út úr margfeldi líkindanna deilt með margfeldi fjöldans í hverjum flokki. Þessi aðferð er mikilvæg þar sem gagnasöfnin eru mjög misjöfn. Tímalengdin er ólík, upplausnin oft minni og minnsti marktæki jarðskjálftinn stærri í eldri gagnasöfnum.
+
+Það sem mynd \ref{fig:gagnasofn} sýnir einnig er hvernig virknin er ólík milli mismunandi tímabila. Fjöldinn þegar $M\geq5,5$ er t.d. miklu meira en þrisvar sinnum meiri í eldra gagnasafninu jafnvel þó safnið sé ekki nema þrisvar sinnum lengra í tíma. Einnig jarðskjálftarnir $M\geq6$ sem eru ekki til staðar í stutta gagnasafninu, þrátt fyrir að endurkomutíminn ætti að vera 21 ár skv. töflu \ref{table:prob}.
+
+
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+% Kafli 7
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\clearpage
+\section{Afþyrping}
+
+Jarðskjálftum er almennt skipt í fjóra flokka: fyrirskjálfta (e. foreshock), aðalskjálfta (e. mainshock), eftirskjálfta (e. aftershock) og sveima (e. swarm). Fyrstu þrír flokkarnir tengjast þar sem fyrir- og eftirskjálftar gerast samfara einhverjum atburði sem er þá aðalskjálftinn. Sveimarnir eru órói svipaður eftirskjálftum en tengjast engum aðalskjálfta.
+
+Fyrir utan Gutenberg-Ricther, þá eru tvær kenningar til viðbótar sem tengja flokkana þrjá: lögmál Båth og lögmál Omori. Lögmál Båth fullyrðir að það sé fastur stærðarmunur á aðalskjálftanum og fyrsta stóra eftirskjálftanum \note{Má vísa í grein Båth ?}. Lögmál Omori er dreififall sem segir til um hversu mikið eftirskjálftarnir minnka í stærð eftir því sem tíminn líður \note{Má vísa í grein Omori þar sem hann setur þetta lögmál fram ? Omori, F. (1894) On the Aftershocks of Earthquakes. Journal of the College of Science, Imperial University of Tokyo, 7, 111-120.}.
+
+Með þessum lögmálum er hægt að einangra aðalskjálftann sem er aðal orsök atburðarins og jafnframt stærsti jarðskjálftinn. Knopoff (2000) bendir einnig á að við hermun jarðskjálftasafna er verið að búa til jarðskjálfta sem allir hafa eðlisfræðilega eiginleika aðalskjálfta. Það er langt frá veruleikanum enda fylgir umtalsverður fjöldi eftirskjálfta hverjum aðalskjálfta. Þess vegna leggur hann mikla áherslu á að einangra safnið við aðalskjálfta með afþyrpingu (e. declustering).
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{img/cluster.png}
+  \vspace{-4mm}
+  \caption{Jarðskjálftahrina í Ölfusi, nóvember 1998}
+  \label{fig:cluster}
+\end{figure}
+
+Mynd \ref{fig:cluster} sýnir atburð sem átti sér stað í nóvember 1998 í Ölfusi. Það er augljóslega einn aðalskjálfti og fjórir sem ekki er augljóst hvort séu aðalskjálftar eða eftirskjálftar. Hinir 106 skjálftarnir eru svo eftirskjálftar sem Knopoff myndi fjarlægja fyrir sína greiningu.
+
+Afþyrping myndi hafa umtalsverð áhrif á þá greiningu sem hefur verið gerð í fyrri köflum. Fjöldi jarðskjálfta $M<5$ myndi minnka umtalsvert og safnið myndi ekki ná eins langt niður í stærð. B-gildið sem fengist með slíku safni væri örugglega minna en það sem fékkst í kafla \ref{gr_main} þar sem brattinn á fjöldanum í safninu væri minni. Hallinn á mælingunum $M\geq5$ væri hins vegar sá sami.
+
+Áhrifin af afþyrpingunni er að vankantarnir sem hafa verið nefndir við beinu línu GR dreifingarinnar yrðu ýktari. Bein lína nær aldrei að falla bæði að litlu gildunum og stóru gildunum sem hafa annan halla. Auk þess er hætt við að sambandið milli stærðar og fjölda af ákveðinni stærð verði ekki lengur línulegt.
+
+Þetta eru hins vegar meðmæli með Pareto dreifingunni sem skv. mynd \ref{fig:sigma_xi} hefur sterka tilhneigingu til að vera hvelft ($\xi$ gildin flest fyrir neðan x-ás). Ef línulega sambandið hverfur er líklegast að samband stærðar og fjölda yrði hvelft eins og Pareto dreifingin.
+
+%\note{Með því að beita afþyrpingu (e. declustering) fækkar mælingunum fyrir neðan stærstu gildin ,,Båth's-law''. Þá myndi ég ætla að hallinn minnki því fjöldinn vex ekki eins hratt. Það eru rök með Pareto dreifingunni því hún er hvelft og getur þess vegna fallið að minni mælingunum ásamt stærri mælingunum.}
+
+%\note{Hugleiðingar um vankant Pareto þegar hún fer inn á ókannaða svæðið - stærstu M gildin. Hvelfti eiginleikinn gerir það að verkum að dreifingin er svartsýnni fyrir stór M en hinar aðferðirnar. Sér í lagi gildir það fyrir GR þegar hallatalan á safninu minnkar. Þá er jafnvel spurning hvort GR verði ekki of bjartsýn.}
+
+
+
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+% Niðurstöður
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\clearpage
+\section{Niðurstöður}
+
+Það virðist sem aðferð Gutenberg-Richter skili viðunandi niðurstöðu þegar meta á jarðskjálfta af ákveðinni stærð. Í tilfelli mats á jarðskjálftum af stórum stærðum, þar sem fjöldinn í safninu er takmarkaður, þarf að gera ráðstafanir eins og að takmarka gagnasafnið að neðan í stærð jarðskjálfta sem eru notaðir við mat stika í GR módelinu.
+
+Hugmynd verkefnisins var að skoða Pareto dreifingu en hún er viðurkennd dreifing þegar safnið fylgir veldisdreifingu og skoða á líkindin á útgildum.
+
+
+
+
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+% Heimildaskrá
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\clearpage
+\section{Heimildaskrá}
+
+Aki, K. (1965). Maximum likelihood estimate of b in the formula $\log~N=a-bM$ and its confidence limits. \textit{Bulletin of the earthquake research institute}, 43, 327-239
+
+Coles, S. (2001). \textit{An introduction to statistical modeling of extreme values} London: Springer.
+
+Gutenberg, B. \& Richter, C. (1954). \textit{Seismicity of the Earth and Associated Phenomena, 2. útgáfa}. Princeton, New Jersey: Princeton University Press
+
+Hyndman, R. J. \& Koehler, A. B. (2006). Another look at measures of forecast accuracy. \textit{International Journal of Forecasting}, 22(4), 679-688
+
+Júlíus Sólnes, Freysteinn Sigmundsson og Bjarni Bessason (2013). \textit{Náttúruvá á Íslandi}. Viðlagatrygging Íslands / Háskólaútgáfan
+
+Knopoff, L. (2000). The magnitude distribution of declustered earthquakes in Southern California. \textit{Proceedings of the National Academy of Sciences}, 97(22), 11880-11884
+
+Marzocchi, W. \& Sandri, L. (2003). A review and new insights on the estimation of the b-value and its uncertainty. \textit{Annals of geophysics}, 46(6), 1271-1282
+
+Marzocchi, W. \& Sandri, L. (2007). A technical note on the bias in the estimation of the b-value and its uncertainty through the Least Squares technique. \textit{Annals of geophysics}, 50(3), 329-339
+
+Rasch, D. (1977). Sample size determination for estimating the parameter of an exponential distribution. \textit{Biometrical Journal}, 19(7), 521-528
+
+Utsu, T. (1965). A method for determining the value of b in a formula $\log~n=a-bM$ showing the magnitude-frequency relation. \textit{Geophysics bulletin of the Hokkaido University}, 13, 99-103
+
+Weichert, D. (1980) Estimation of the earthquake recurrence parameters for unequal observation periods for different magnitudes. \textit{Bulletin of the seismological society of America}, 70(4), 1337-1346
+
+
+
+
+
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+% Appendix
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\clearpage
+\section{Viðauki}
+
+\subsection{Fjöldi í flokki}\label{fj_flokki}
+
+Við úrvinnslu jarðskjálftamælinga og við mat á b, er oftar en ekki notast við flokkaðar mælingar. Þá er átt við að M sé skipt í flokka af ákveðinni stærð og talin fjöldi jarðskjálfta í hverjum flokk. Þessi framsetning er í anda massafalls sem gefur hlutfall gilda í safni af ákveðinni stærð.
+
+Vandinn við þessa aðferð er að meðaltalið, reiknað út frá flokkunum, verður bjagað miðað við meðaltalið út úr gagnasafninu. Einnig er M$_{thres}$ í jöfnu \ref{eq:ml_b} miðgildi minnsta flokksins í gagnasafninu. Þarna er komin viðbótar skekkja sem er reynt að leiðrétta fyrir með því að segja M$_{low}$= M$_{thres}-\Delta$M$/2$ (M\&S[2003]).
+
+Við lausn jöfnu \ref{eq:ml_b} er notast við miðgildi flokkanna M$_0$,...,M$_k$, fjöldann í hverjum flokk n$_0$,..,n$_k$ og leiðréttinguna M$_{low}$= M$_{thres}-\Delta$M$/2$. Jafnan verður þá:
+\begin{eqnarray}
+b & = & \frac{1}{\ln(10)(\hat{\mu} - M_{thres}+\Delta M/2)}\nonumber\\
+  & = & \frac{1}{\ln(10)\left(\frac{1}{N}\sum_{i=0}^k n_iM_i - M_{thres} + \Delta M/2\right)}\nonumber\\
+  & = & \frac{1}{\ln(10)\left(\frac{1}{N}\sum_{i=0}^k n_iM_i - M_{low}\right)}
+\end{eqnarray}
+en hér er N heildarfjöldi jarðskjálfta í gagnasafninu og $\Delta$M stærð flokkanna. Í tilfelli þess að gagnasafnið hafi að geyma minnsta marktæka gildið M$_{min}$, þá má segja að M$_{low}=$ M$_{min}$.
+
+
+
+\note{Hér má bæta við texta sem vísar í grein Weichert um að blanda saman söfnum af mismunandi stærð og tíma}
+
+
+\fi
+
+
+\end{document}

@@ -205,7 +205,19 @@
 
 The idea of having all devices connected has led to the concept of Internet of Things (IoT). Here all devices such as electric or water meters, household devices and about every thing with built in sensors, are communicating with each other or with a central server via short distance communication or wide area networks (WAN).
 
-Making this happening brings out a challenge due to the amount of devices, connected to a single cell in the cellular network. All these devices extract resources, they interfere with each other and their location is very probable deep in the house or in the cellar, where communication is hard to withheld.
+One implementation is utilising the LTE standard and modifying it to meet the requirement needed for IoT. Besides the massive volumes it has to handle, there are requirements on coverage, communication complexity and battery life \cite{wang}.
+
+The devices need to be accessible from hard radio conditions like from house cellar or a technique room in the core. The communications have to be simple for the sake of resilience and low power consumption. Lastly it is expected that the battery to last the live of the device. It is therefore extremely important that no unnecessary transmission is undertaken.
+
+When determining the capacity of the base station, or the serving cell, it is not enough to have the theoretical capacity analysed. The random nature of when the device transmits, increases the chance of collision when the number of devices increases. As mentioned the requirement is to avoid such collision. The capacity therefore reduces when taken this into account.
+
+A suitable approach is to identify the theoretical capacity of an NB-IoT cell. Then introducing randomness into the access, taking into account the possibility of collision. The result is a multi-dimensional space of capacity weighted against probability of collision and number of devices. To further enrich the analysis, the radio condition can be taken into account, introducing further randomness since poorer radio condition results in higher re-transmission probability when the number of devices increases.
+
+% Making this happening brings out a challenge due to the amount of devices, connected to a single cell in the cellular network. All these devices extract resources, they interfere with each other and their location is probably deep in the house or in the cellar, where communication is hard to withheld.
+
+%The standard has taken into account the attenuation in the radio, adding robustness in the transmission providing up to 20 dB higher pathloss. When this is combined with the need for long battery life, the reliability of the transmission becomes important. If the battery limit is regarded as a finite pool of transmissions, it becomes unnecessary usage to re-transmit. 
+
+\vspace{2cm}
 
 \point{The challenge is on the physical channels, when the load increases. The random access can result in collision, making it necessary to resend the package. Re-transmission causes unnecessary communication and extra battery. This is therefore something to avoid.}
 
@@ -217,15 +229,19 @@ Making this happening brings out a challenge due to the amount of devices, conne
 \clearpage
 \section{NB-IoT}
 
-According to 3GPP there are three implementations of wide area network (WAN) narrowband internet-of-things (NB-IoT). One uses a single GSM transmission channel (TCH) and is integrated into the GSM network. The other two are co-existing with LTE where one uses the guard band between LTE channels and the other is embedded into the LTE carrier, using resources of the LTE carrier.
+According to 3GPP there are three implementations of wide area network (WAN) narrowband internet-of-things (NB-IoT). One uses a single GSM transmission channel (TCH) and is integrated into the GSM network. The other two are co-existing with LTE where one uses the guard band between LTE channels and the other is embedded into the LTE channel.
 
-NB-IoT downlink is defined to use 12 sub-carriers, with each sub-carrier having bandwidth of 15 kHz. The uplink uses either a single sub-carrier, which can be of varying bandwidth: 3,75 kHz or 15 kHz, or it uses 3, 6, or 12 sub-carriers of 15 kHz bandwidth each\cite{3gpp}.
+Regardless of where the carrier resides, the physical channel structure is always the same. It is based on LTE, but scaled down to accommodate for the reduced need for high transmission throughput. That means the carrier bandwidth is narrower, but preserving the ratio between signali resource blocks and transmission blocks.
 
-The total bandwidth of the downlink sums to 180 kHz. That fits neatly into a GSM TCH which is 200 kHz wide. The LTE guard band varies in width, depending on carrier bandwidth. Most deployments of LTE use 5 MHz or larger bandwidth, since the smaller bandwidths introduce limitations. The sub-carrier definition for the in-band case, is the same as used by the LTE control channels. The NB-IoT transmission can therefore be carried alongside normal LTE traffic if there is capacity to share the control space \point{Need to confirm if it is correctly understood that LTE and NB-IoT share the control space and if they can co-exist on the same channel}.
+NB-IoT downlink is defined to use 12 sub-carriers, where each sub-carrier has bandwidth of 15 kHz. The uplink uses either a single sub-carrier, which can be of varying bandwidth: 3,75 kHz or 15 kHz, or it uses 3, 6, or 12 sub-carriers of 15 kHz bandwidth each\cite{3gpp}.
 
-NB-IoT is defined based on the LTE carrier structure. The smallest LTE transmission element is resource element (RE) which uses 15 kHz bandwidth. A resource block (RB) is 12 RE and occupies 180 kHz (12*15 kHz=180kHz). The LTE carrier can be of varying bandwidth, from 1,4 MHz to 20 MHz, where the difference lies in the number of RB used.
+The total bandwidth of the downlink sums to 180 kHz. That fits neatly into a GSM transmission channel (TCH) which is 200 kHz wide. The LTE guard band varies in width, depending on carrier bandwidth. Most deployments of LTE though, use 5 MHz or larger bandwidth, since the smaller bandwidths introduce exceptions from the normal structure.
 
-Since the structure is common, NB-IoT can be defined as functionality within the LTE carrier. According to Schlienz (2106) \cite{schlienz} there are specific RB indexes where NB-IoT can be activated. That way both functionalities (LTE and NB-IoT) are active at the same time.
+%The sub-carrier definition for the in-band case, is the same as used by the LTE control channels. The NB-IoT transmission can therefore be carried alongside normal LTE traffic if there is capacity to share the control space \point{Need to confirm if it is correctly understood that LTE and NB-IoT share the control space and if they can co-exist on the same channel}.
+
+%NB-IoT is defined based on the LTE carrier structure. The smallest LTE transmission element is resource element (RE) which uses 15 kHz bandwidth. A resource block (RB) is 12 RE and occupies 180 kHz (12*15 kHz=180kHz). The LTE carrier can be of varying bandwidth, from 1,4 MHz to 20 MHz, where the difference lies in the number of RB used.
+
+%Since the structure is common, NB-IoT can be defined as functionality within the LTE carrier. According to Schlienz (2106) \cite{schlienz} there are specific RB indexes where NB-IoT can be activated. That way both functionalities (LTE and NB-IoT) are active at the same time.
 
 
 
@@ -286,10 +302,13 @@ Here are some outstanding questions. One coverage class something mentioned in t
 \section{References}
 
 \begin{thebibliography}{4}
+\bibitem{wang}
+Wang, Y. P. E., Lin, X., Adhikary, A., Grovlen, A., Sui, Y., Blankenship, Y., ... \& Razaghi, H. S. (2017).
+\textit{A primer on 3GPP narrowband Internet of Things}. IEEE communications magazine, 55(3), 117-123.
+
 \bibitem{schlienz}
 Schlienz, J., \& Raddino, D. (2016).
-\textit{Narrowband internet of things whitepaper}
-. White Paper, Rohde\&Schwarz, 1-42.
+\textit{Narrowband internet of things whitepaper}. White Paper, Rohde\&Schwarz, 1-42.
 
 \bibitem{3gpp}
 3GPP TS 36.201,
@@ -318,7 +337,7 @@ Chen, M., Miao, Y., Hao, Y., \& Hwang, K. (2017).
 
 \end{itemize}
 
-
+\hghlght{Statement:} For a device with 164 dB coupling loss, a 10-year battery life can be reached if the UE transmits 200-byte data a day on average {[TR 45.820 v13.1.0, “Cellular system support for ultra low complexity and low throughput internet of things,” Nov. 2015]}
 
 
 \end{document}

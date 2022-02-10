@@ -231,11 +231,13 @@ A suitable approach is to identify the theoretical capacity of an NB-IoT cell. T
 
 According to 3GPP there are three implementations of wide area network (WAN) narrowband internet-of-things (NB-IoT). One uses a single GSM transmission channel (TCH) and is integrated into the GSM network. The other two are co-existing with LTE where one uses the guard band between LTE channels and the other is embedded into the LTE channel.
 
-Regardless of where the carrier resides, the physical channel structure is always the same. It is based on LTE, but scaled down to accommodate for the reduced need for high transmission throughput. That means the carrier bandwidth is narrower, but preserving the ratio between signali resource blocks and transmission blocks.
+Regardless of where the carrier resides, the physical channel structure is always the same. It is based on LTE, but scaled down to occupy less bandwidth which gives an opportunity to place the carrier with greater flexibilty. The need for high throughput isn't relevant for NB-IoT, since the devices send limited amount of data. The LTE structure in itself incorporates high throughput. This can be utilised by NB-IoT, adding further data protection and reconstruction. That gives added capability to handle channel path loss of up to 20 dB {[\hghlght{missing reference}}].
 
-NB-IoT downlink is defined to use 12 sub-carriers, where each sub-carrier has bandwidth of 15 kHz. The uplink uses either a single sub-carrier, which can be of varying bandwidth: 3,75 kHz or 15 kHz, or it uses 3, 6, or 12 sub-carriers of 15 kHz bandwidth each\cite{3gpp}.
+NB-IoT downlink is defined to use 12 sub-carriers, with each sub-carrier having bandwidth of 15 kHz. That adds up to 180 kHz, which matches perfectly the GSM transmission channel (TCH) of 200 kHz. The uplink uses either a single sub-carrier, which can be of varying bandwidth: 3,75 kHz or 15 kHz, or it uses 3, 6, or 12 sub-carriers of 15 kHz bandwidth each\cite{3gpp}. The last is the same as for the downlink and the total bandwidth becomes 180 kHz.
 
-The total bandwidth of the downlink sums to 180 kHz. That fits neatly into a GSM transmission channel (TCH) which is 200 kHz wide. The LTE guard band varies in width, depending on carrier bandwidth. Most deployments of LTE though, use 5 MHz or larger bandwidth, since the smaller bandwidths introduce exceptions from the normal structure.
+NB-IoT devices differ from other mobile devices in that they aren't downlink critical. The sensor deployment requires that data from the sensors have to be communicated with other devices or a central service. The uplink is therefore the important direction. It can be further assumed that the devices initiates the communication, not the base station. \hghlght{Investigate how the paging mechanism is implemented in NB-IoT. There must be some way for the base station to reach the UE.}
+
+%The LTE guard band varies in width, depending on carrier bandwidth. Most deployments of LTE though, use 5 MHz or larger bandwidth, since the smaller bandwidths introduce exceptions from the normal structure.
 
 %The sub-carrier definition for the in-band case, is the same as used by the LTE control channels. The NB-IoT transmission can therefore be carried alongside normal LTE traffic if there is capacity to share the control space \point{Need to confirm if it is correctly understood that LTE and NB-IoT share the control space and if they can co-exist on the same channel}.
 
@@ -243,6 +245,26 @@ The total bandwidth of the downlink sums to 180 kHz. That fits neatly into a GSM
 
 %Since the structure is common, NB-IoT can be defined as functionality within the LTE carrier. According to Schlienz (2106) \cite{schlienz} there are specific RB indexes where NB-IoT can be activated. That way both functionalities (LTE and NB-IoT) are active at the same time.
 
+\subsection{Channel structure}
+
+\hghlght{It is important to describe the physical channels, since the analysis goes on about identifying when they reach congestion}. \point{Needs to be investigated if the higher layer channels introduce any limitation.}
+
+\subsection{Access}
+
+As mentioned, NB-IoT is uplink critical communication meaning that the device initiates the communication and the data exchanged is something the device has been collecting. This means that one of the most critical capacity aspects of NB-IoT is how many devices can be accessing the network and how long does it take for the device to ,,get rid of the data''.
+
+The access process is as follows: \hghlght{These steps have to be verified from \cite{3gpp}}
+\begin{enumerate}
+  \item Random access: the device initiates a connection with the base station using the random channel
+  \begin{enumerate}
+    \item Here the possibility of collision with other devices occurs i.e. when two devices try to access at same time they interfere and neither of them gets through
+    \item \hghlght{What is the retry mechanism ?}
+  \end{enumerate}
+  \item The base station assigns resources on the dedicated channels \point{freeing resources from the random access channel ??}
+  \item When the device has gotten its dedicated resources it can begin transmitting
+\end{enumerate}
+
+The capacity limit is reached when the number of devices increases, partly due to the probability of collisions and partly due to the capacity of the dedicated channels. \hghlght{The point of the paper is to identify which one is congested before.}
 
 
 \subsection{Evaluation points}
@@ -288,7 +310,6 @@ In the following work of the focus will be on in-band LTE NB-IoT.
 \point{* Cover the access method}
 
 Schlienz (2016) is a really god reference to work the access method from.
-1
 
 * Coverage classes - how different classes affect the access mechanism
 

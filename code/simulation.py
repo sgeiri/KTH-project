@@ -13,20 +13,33 @@ T_INTER = [30, 300]        # Create a car every [min, max] seconds
 SIM_TIME = 1000            # Simulation time in seconds
 
 
-def ue_gen():
-  i = random.randint(0,2)
-  return(i)
-
-def rach(env):
+def ue_gen(env, rach):
   while True:
-    i = ue_gen()
+    for it in (random.randint(0,2)):
+      print(env.now, "attempt", it)
+      req = env.process(rach_req(env, rach))
+      yield req
 
-    print("Time now:", env.now, "value:", i)
+      rach.release(req)
+
+    # One step at a time
     yield env.timeout(1)
 
-env = simpy.Environment()
+def rach_req(env, rach):
+  req = rach.request()
 
-env.process(rach(env))
+  if (req):
+    print (env.now, "avaiable resources")
+  
+    print("Time now:", env.now)
+    yield env.timeout(1)
+  
+  return(req)
+
+env = simpy.Environment()
+rach = simpy.Resource(env, 1)
+
+env.process(ue_gen(env, rach))
 env.run(until=20)
 
 """

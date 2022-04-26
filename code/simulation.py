@@ -8,39 +8,30 @@ from numpy import random
 RANDOM_SEED = 42
 RADIO_SIZE = 2
 
+NUM_UE = 1000
+
 TX_BYTES = [0, 100]
 T_INTER = [30, 300]        # Create a car every [min, max] seconds
 SIM_TIME = 1000            # Simulation time in seconds
 
-
-def ue_gen(env, rach):
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+def simEnv(env):
   while True:
-    for it in (random.randint(0,2)):
-      print(env.now, "attempt", it)
-      req = env.process(rach_req(env, rach))
-      yield req
-
-      rach.release(req)
+    for ue in range(NUM_UE):
+      if (random.uniform(1000)<100):
+        print(str(env.now)+":", ue, "transmitted !")
 
     # One step at a time
     yield env.timeout(1)
 
-def rach_req(env, rach):
-  req = rach.request()
 
-  if (req):
-    print (env.now, "avaiable resources")
-  
-    print("Time now:", env.now)
-    yield env.timeout(1)
-  
-  return(req)
-
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 env = simpy.Environment()
-rach = simpy.Resource(env, 1)
+# rach = simpy.Resource(env, 1)
 
-env.process(ue_gen(env, rach))
-env.run(until=20)
+env.process(simEnv(env))
+env.run(until=200)
 
 """
 def ue(name, env, base_station, radio_res):

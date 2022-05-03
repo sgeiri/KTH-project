@@ -154,10 +154,10 @@
 \hypersetup{colorlinks=true,linkcolor={ymadblue}}
 
 
-\newcommand{\tilv}[1]{\textbf{\color{ymagreen} [#1]}}
-\newcommand{\note}[1]{\textbf{\color{ymagray}[#1]}}
+\newcommand{\tilv}[1]{\textbf{\color{ymagreen}[#1]}}
+\newcommand{\note}[1]{\textbf{[\color{ymablue}#1}]}
 \newcommand{\highlight}[1]{{\bluen{#1}}}
-\newcommand{\hghlght}[1]{\textbf{\color{ymaorng} #1}}
+\newcommand{\hh}[1]{\textbf{\color{ymaorng} #1}}
 \newcommand{\point}[1]{\textbf{\color{ymared} #1}}
 \newcommand{\rem}[1]{{\red{\textbf{REMOVE:}} \red{\sout{#1}}}}
 
@@ -227,7 +227,7 @@ A suitable approach is to identify the theoretical capacity of an NB-IoT cell. T
 % Kafli
 % -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 \clearpage
-\section{NB-IoT}
+\section{NB-IoT}\label{theo}
 
 3GPP defines wide area network (WAN) narrowband internet-of-things (NB-IoT) to handle communication with connected devices. The physical channel structure is the same as LTE, but scaled down to occupy less bandwidth. The downscaling provides flexibility to place the carrier where there is available space. One solution is to place it on a single  GSM transmission channel (TCH), and that way integrate it with the GSM network. The other two are co-existing with LTE, where one uses the guard band between LTE channels and the other is embedded into the LTE carrier \cite{schlienz}.
 
@@ -250,28 +250,28 @@ An additional design criteria for NB-IoT, is long battery life \cite{wang}. Havi
 NB-IoT downlink is defined to use 12 sub-carriers, with each sub-carrier having bandwidth of 15 kHz. That adds up to 180 kHz, which fits perfectly into the GSM transmission channel (TCH) of 200 kHz. The uplink uses either a single sub-carrier, which can be of varying bandwidth: 3,75 kHz or 15 kHz, or it uses 3, 6, or 12 sub-carriers of 15 kHz bandwidth each\cite{3gpp}. The last is the same as for the downlink and the total bandwidth becomes 180 kHz.
 
 
-\hghlght{It is important to describe the physical channels, since the analysis goes on about identifying when they reach congestion}. \point{Needs to be investigated if the higher layer channels introduce any limitation.}
+\hh{It is important to describe the physical channels, since the analysis goes on about identifying when they reach congestion}. \point{Needs to be investigated if the higher layer channels introduce any limitation.}
 
 \subsection{Access}
 
 As mentioned, NB-IoT is uplink critical communication meaning that the device initiates the communication and the data exchanged is something the device has been collecting. This means that one of the most critical capacity aspects of NB-IoT is how many devices can be accessing the network and how long does it take for the device to ,,get rid of the data''.
 
-The access process is as follows: \hghlght{These steps have to be verified from \cite{3gpp}}
+The access process is as follows: \hh{These steps have to be verified from \cite{3gpp}}
 \begin{enumerate}
   \item Random access: the device initiates a connection with the base station using the random channel
   \begin{enumerate}
     \item Here the possibility of collision with other devices occurs i.e. when two devices try to access at same time they interfere and neither of them gets through
-    \item \hghlght{What is the retry mechanism ?}
+    \item \hh{What is the retry mechanism ?}
   \end{enumerate}
   \item The base station assigns resources on the dedicated channels \point{freeing resources from the random access channel ??}
   \item When the device has gotten its dedicated resources it can begin transmitting
 \end{enumerate}
 
-The capacity limit is reached when the number of devices increases, partly due to the probability of collisions and partly due to the capacity of the dedicated channels. \hghlght{The point of the paper is to identify which one is congested before.}
+The capacity limit is reached when the number of devices increases, partly due to the probability of collisions and partly due to the capacity of the dedicated channels. \hh{The point of the paper is to identify which one is congested before.}
 
 \point{Notes:}\vspace{-4mm}
 \begin{itemize}
-  \item \hghlght{Investigate how the paging mechanism is implemented in NB-IoT. There must be some way for the base station to reach the UE.}
+  \item \hh{Investigate how the paging mechanism is implemented in NB-IoT. There must be some way for the base station to reach the UE.}
 \end{itemize}
 
 
@@ -280,7 +280,7 @@ The capacity limit is reached when the number of devices increases, partly due t
 
 The limitations when it comes to serving multiple users lies within the random access procedure. The user has limited power and has therefore to make its transmission based on most efficient transmission methods. Collision is important to avoid. Modulation and coding scheme have to navigate between giving the maximum throughput but with best recovery of distorted bits \point{this should be looked into - find articles evaluating this trade-off}.
 
-When the user has gotten the random access procedure completed and is scheduled on the transmission channels. The next step is the focus of the thesis - how to maximise ??, to be able to service more users and withholding the goal of minimum transmission.w
+When the user has gotten the random access procedure completed and is scheduled on the transmission channels. The next step is the focus of the thesis - how to maximise ??, to be able to service more users and withholding the goal of minimum transmission.
 
 
 \subsection{Extras}
@@ -324,6 +324,31 @@ Schlienz (2016) is a really god reference to work the access method from.
 
 Here are some outstanding questions. One coverage class something mentioned in the specifikation or is it something suggested in literature.
 
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+% HERMUN
+% -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+\clearpage
+\section{Simulation}
+
+To simulate the environment there are a number of key features that need to be taken into account:
+
+\begin{itemize}
+\item What is the expected number of UE trying to send \note{base this on articles}
+\item How frequent do the UE send like eg. how many times a day \note{base this on articles}
+\item What is the package size that is sent per transmission (full session) \note{base this on articles}
+\item And how long does it take to process the package
+\end{itemize}
+
+The simulation is a Python script relying on the package SimPy. This is an event driven simulation package, but currently the events aren't used. Instead it is utilised such that one step represents one TTI. The script could be extended to have a limited number of RACH channels \note{assuming it is one available per TTI}, thus making use of the built in features as events.
+
+\subsection{Assumptions}
+
+The initial assumption, is to look at an area of one base station (eNodeB). According to Ericsson blog \cite{lme_web1} the base station can serve an area up to 40 km and have around 50.000 connections on the cell. A more pragmatic solution is to look at a rural area of 20 km radius. Such an area can have \hh{xx} homes. If a home is expected to have \hh{yy} NB-IoT devices, the scenario gives \hh{xx*yy} connections.
+
+Here the focus is on smart metering devices. A measurement is sent every 5-15 minuttes and the size of the package is \hh{bb}. \note{The package size is random variable with \?\? distribution}
+
+
+
 
 % -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 % Heimildaskrá
@@ -353,6 +378,12 @@ Chen, M., Miao, Y., Hao, Y., \& Hwang, K. (2017).
 \textit{Narrow band internet of things}
 . IEEE access, 5, 20557-20577.
 
+\bibitem{lme_web1}
+Ericsson. (2019).
+\textit{What is NB-IoT? Practical tips to unlock its business potential}.
+Ericsson blog.
+\url{https://www.ericsson.com/en/blog/2019/10/what-is-nb-iot}
+
 \end{thebibliography}
 
 
@@ -367,7 +398,7 @@ Chen, M., Miao, Y., Hao, Y., \& Hwang, K. (2017).
 
 \end{itemize}
 
-\hghlght{Statement:} For a device with 164 dB coupling loss, a 10-year battery life can be reached if the UE transmits 200-byte data a day on average {[TR 45.820 v13.1.0, “Cellular system support for ultra low complexity and low throughput internet of things,” Nov. 2015]}
+\hh{Statement:} For a device with 164 dB coupling loss, a 10-year battery life can be reached if the UE transmits 200-byte data a day on average {[TR 45.820 v13.1.0, “Cellular system support for ultra low complexity and low throughput internet of things,” Nov. 2015]}
 
 
 \end{document}

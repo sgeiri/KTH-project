@@ -247,8 +247,28 @@ An additional design criteria for NB-IoT, is long battery life \cite{wang}. Havi
 
 \subsection{Channel structure}
 
-NB-IoT downlink is defined to use 12 sub-carriers, with each sub-carrier having bandwidth of 15 kHz. That adds up to 180 kHz, which fits perfectly into the GSM transmission channel (TCH) of 200 kHz. The uplink uses either a single sub-carrier, which can be of varying bandwidth: 3,75 kHz or 15 kHz, or it uses 3, 6, or 12 sub-carriers of 15 kHz bandwidth each\cite{3gpp}. The last is the same as for the downlink and the total bandwidth becomes 180 kHz.
+The most common implementation of NB-IoT in Europe is using Frequency Division Duplexing (FDD) \note{Missing reference}. The following description will therefore only focus on Type 1 frame structure.
 
+One NB-IoT radio downlink frame spans 10 ms i.e. the time each device is assigned to receive from the base station (eNB). This frame is divided into 10 subframes, where each is two slots. One slot consists of 7 Orthogonal Frequency Multiple Access (OFDMA) symbols with varying symbol size.
+
+In the frequency domain the bandwidth is divided into 12 sub-carriers, with each sub-carrier having bandwidth of 15 kHz. This gives a total bandwidth of 180 kHz and a grid equivalent to one LTE resource block (RB), as shown in figure \ref{fig:lteRb} \cite{schlienz}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{img/The-Resource-Block-in-LTE.png}
+  %\vspace{-0mm}
+  \caption{Resource block structure of LTE}
+  \label{fig:lteRb}
+\end{figure}
+
+The uplink differs from the downlink in that it uses Single Carrier Frequency Division Multiple Access (SC-FDMA). It has the same total bandwidth but can be implemented with two types of sub-carrier bandwidth: 15 kHz or 3,75 kHz. The bandwidth is decided with configuration in the eNB
+
+In the case of 15 kHz, the grid structure is the same as for the downlink. In the other case 
+
+
+, or it uses 3, 6, or 12 sub-carriers of 15 kHz bandwidth each \cite{3gpp}. The last is the same as for the downlink and the total bandwidth becomes 180 kHz.
+
+\hh{The bandwidth has the advantage of fitting into the GSM transmission channel (TCH) of 200 kHz}.
 
 \hh{It is important to describe the physical channels, since the analysis goes on about identifying when they reach congestion}. \point{Needs to be investigated if the higher layer channels introduce any limitation.}
 
@@ -345,7 +365,7 @@ The simulation is a Python script relying on the package SimPy. This is an event
 
 The initial assumption, is to look at an area of one base station (eNodeB). According to Ericsson blog \cite{lme_web1} the base station can serve an area up to 40 km and have around 50.000 connections on the cell. A more pragmatic solution is to look at a rural area of 20 km radius. Such an area can have \hh{xx} homes. If a home is expected to have \hh{yy} NB-IoT devices, the scenario gives \hh{xx*yy} connections.
 
-Here the focus is on smart metering devices. A measurement is sent every 5-15 minuttes and the size of the package is \hh{bb}. \note{The package size is random variable with \?\? distribution}
+Here the focus is on smart metering devices. A measurement is sent every 5-15 minuttes and the size of the package is \hh{bb}. \note{The package size is random variable with ?? distribution}
 
 
 
